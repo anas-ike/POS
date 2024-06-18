@@ -1,12 +1,23 @@
 <?php
 
 require "../config/config.php";
+require "../config/functions.php";
+require "../module/mode-user.php";
 
 
 $title = "Tambah User - POS";
 require "../template/header.php";
 require "../template/navbar.php";
 require "../template/sidebar.php";
+
+if (isset($_POST['simpan'])) {
+    if (insert($_POST) > 0) {
+        echo '<script>
+                alert("User baru berhasil dibuat..");
+            </script>';
+            
+    }
+}
 
 ?>
 
@@ -33,6 +44,7 @@ require "../template/sidebar.php";
     <section class="content">
         <div class="container-fluid">
             <div class="card">
+                <form action="" method="post" enctype="multipart/form-data">
                 <div class="card-header">
                     <h3 class="card-title"><i class="fas fa-plus fa-small"></i> Add User</h3>
                     <button type="submit" name="simpan" class="btn btn-primary btn-sm float-right"><i class="fas fa-save"></i> Simpan</button>
@@ -79,6 +91,7 @@ require "../template/sidebar.php";
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
 
