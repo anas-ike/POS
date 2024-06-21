@@ -45,4 +45,17 @@ function insert($data){
     return mysqli_affected_rows($conn);
 }
 
+
+function delete($id, $foto){
+    
+    global $conn;
+
+    $sqlDel = "DELETE FROM tbl_user WHERE userid = $id";
+    mysqli_query($conn, $sqlDel);
+    if($foto != 'default.png') {
+        unlink('../asset/image/' . $foto);
+    }
+
+    return mysqli_affected_rows($conn);
+}
 ?>
