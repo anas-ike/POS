@@ -1,7 +1,16 @@
 <?php
 
 
+session_start();
+
+if (!isset($_SESSION["ssLoginPOS"])) {
+  header("location: auth/login.php");
+  exit();
+}
+
 require "config/config.php";
+
+require "config/functions.php";
 
 $title  = "Dashboard";
 require "template/header.php";
