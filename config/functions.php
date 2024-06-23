@@ -91,10 +91,26 @@ function menuSetting(){
     }
     return $result;
 }
+function menuMaster(){
+    if (userMenu() == 'supplier') {
+        $result = 'menu-is-opening menu-open';
+    } else{
+        $result = null;
+    }
+    return $result;
+}
 
 
 function menuUser(){
     if (userMenu() == 'user') {
+        $result = 'active';
+    } else {
+        $result = null;
+    }
+    return $result;
+}
+function menuSupplier(){
+    if (userMenu() == 'supplier') {
         $result = 'active';
     } else {
         $result = null;
