@@ -92,7 +92,7 @@ function menuSetting(){
     return $result;
 }
 function menuMaster(){
-    if (userMenu() == 'supplier') {
+    if (userMenu() == 'supplier' || userMenu() == 'customer') {
         $result = 'menu-is-opening menu-open';
     } else{
         $result = null;
@@ -111,6 +111,14 @@ function menuUser(){
 }
 function menuSupplier(){
     if (userMenu() == 'supplier') {
+        $result = 'active';
+    } else {
+        $result = null;
+    }
+    return $result;
+}
+function menuCustomer(){
+    if (userMenu() == 'customer') {
         $result = 'active';
     } else {
         $result = null;
