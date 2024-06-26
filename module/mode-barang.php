@@ -87,7 +87,7 @@ function update($data){
     $gambar         = mysqli_real_escape_string($conn, $_FILES['image']['name']);
 
     //cek barcode lama
-    $queryBarcode = mysqli_query($conn, "SELECT * FROM tbl_barang WHERE barcode = '$barcode'");
+    $queryBarcode = mysqli_query($conn, "SELECT * FROM tbl_barang WHERE id_barang = '$id'");
     $dataBrg      = mysqli_fetch_assoc($queryBarcode);
     $curBarcode   = $dataBrg['barcode'];
     // barcode baru
@@ -111,7 +111,7 @@ function update($data){
         } else {
             $nmgbr = $id . '-' . rand(10, 1000);
         }
-        $imgBrg = uploadimg(null, $id);
+        $imgBrg = uploadimg($url, $nmgbr);
         if ($gbrLama != 'default-brg.png') {
             @unlink('../asset/image/' .$gbrLama);
         }
