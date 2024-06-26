@@ -60,3 +60,15 @@ function insert($data){
 
     return mysqli_affected_rows($conn);
 }
+
+function delete($id, $gbr){
+    global $conn;
+    $sqlDel = "DELETE FROM tbl_barang WHERE id_barang= '$id'";
+    mysqli_query($conn, $sqlDel);
+
+    if ($gbr != 'default-brg.png') {
+        unlink('../asset/image/' . $gbr);
+    }
+
+    return mysqli_affected_rows($conn);
+}
