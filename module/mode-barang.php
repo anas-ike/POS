@@ -72,3 +72,64 @@ function delete($id, $gbr){
 
     return mysqli_affected_rows($conn);
 }
+
+function update($data){
+    global $conn;
+
+    $id             = mysqli_real_escape_string($conn, $data['kode']);
+    $barcode        = mysqli_real_escape_string($conn, $data['barcode']);
+    $name           = mysqli_real_escape_string($conn, $data['name']);
+    $satuan         = mysqli_real_escape_string($conn, $data['satuan']);
+    $harga_beli     = mysqli_real_escape_string($conn, $data['harga_beli']);
+    $harga_jual     = mysqli_real_escape_string($conn, $data['harga_jual']);
+    $stockmin       = mysqli_real_escape_string($conn, $data['stock_minimal']);
+    $gbrLama       = mysqli_real_escape_string($conn, $data['oldImg']);
+    $gambar         = mysqli_real_escape_string($conn, $_FILES['image']['name']);
+
+    //cek barcode lama
+    $queryBarcode = mysqli_query($conn, "SELECT * FROM tbl_barang WHERE barcode = '$barcode'");
+    $dataBrg      = mysqli_fetch_assoc($queryBarcode);
+    $curBarcode   = $dataBrg['barcode'];
+    // barcode baru
+    $cekBarcode     = mysqli_query($conn, "SELECT * FROM tbl_barang WHERE barcode = '$barcode'");
+
+
+    // jika barcode diganti
+    if ($barcode !== $curBarcode) {
+        // jika barcode sudah ada
+        if (mysqli_num_rows($cekBarcode)) {
+            echo '<script>alert("Kode barcode sudah ada, barang gagal diperbarui")</script>';
+            return false;
+        }
+    }
+
+    //cek gambar 
+    if ($gambar != null) {
+        $url = "index.php";
+        if ($gbrLama == 'default-brg.png') {
+            $nmgbr = $id;
+        } else {
+            $nmgbr = $id . '-' . rand(10, 1000);
+        }
+        $imgBrg = uploadimg(null, $id);
+        if ($gbrLama != 'default-brg.png') {
+            @unlink('../asset/image/' .$gbrLama);
+        }
+    }else {
+        $imgBrg = $gbrLama;
+    }
+
+
+    mysqli_query($conn, "UPDATE tbl_barang SET 
+                                        barcode     = '$barcode',
+                                        nama_barang = '$name',
+                                        harga_beli = $harga_beli,
+                                        harga_jual = $harga_jual,
+                                        satuan = '$satuan',
+                                        stock_minimal = $stockmin,
+                                        gambar = '$imgBrg'
+                                        WHERE id_barang = '$id'
+                                        ");
+
+    return mysqli_affected_rows($conn);
+}
