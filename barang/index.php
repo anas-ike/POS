@@ -113,8 +113,8 @@ if ($msg == 'updated') {
                                     </td>
                                     <td><?= $brg['id_barang'] ?></td>
                                     <td><?= $brg['nama_barang'] ?></td>
-                                    <td class="text-center"><?= number_format( $brg['harga_beli'],0,',','.') ?></td>
-                                    <td class="text-center"><?= number_format( $brg['harga_jual'],0,',','.') ?></td>
+                                    <td><?= number_format( $brg['harga_beli'],0,',','.') ?></td>
+                                    <td><?= number_format( $brg['harga_jual'],0,',','.') ?></td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-secondary" id="btnCetakBarcode" data-barcode="<?= $brg['barcode'] ?>" data-nama="<?= $brg['nama_barang'] ?>" title="cetak barcode"><i class="fas fa-barcode"></i></button>
                                         <a href="form-barang.php?id=<?= $brg['id_barang'] ?>&msg=editing" class="btn btn-warning btn-sm" title="edit barang"><i class="fas fa-pen"></i></a>
