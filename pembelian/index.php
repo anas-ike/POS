@@ -38,7 +38,8 @@ if ($msg == 'deleted') {
 
 $kode = @$_GET['pilihbrg'] ? @$_GET['pilihbrg'] : '';
 if ($kode) {
-    $selectBrg = getData("SELECT * FROM tbl_barang WHERE id_barang = '$kode'")[0];
+    $result = getData("SELECT * FROM tbl_barang WHERE id_barang = '$kode'");
+    $selectBrg = !empty($result) ? $result[0] : null;
 }
 
 if (isset($_POST['addbrg'])) {
@@ -63,6 +64,8 @@ $noBeli = generateNo();
 
 
 ?>
+
+<!-- PHP code before HTML -->
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -103,13 +106,13 @@ $noBeli = generateNo();
                                 <div class="col-sm-10">
                                     <select name="kodeBrg" id="kodeBrg" class="form-control">
                                         <option value="">-- Pilih Kode Barang --</option>
-                                            <?php
-                                            $barang = getData("SELECT * FROM tbl_barang");
-                                            foreach ($barang as $brg) { ?>
-                                                <option value="?pilihbrg=<?= $brg['id_barang'] ?> <?= @$_GET['pilihbrg'] == $brg['id_barang'] ? 'selected' : null ?>"><?= $brg['id_barang'] . " | " . $brg['nama_barang'] ?></option>
-                                            <?php
-                                            }
-                                            ?>
+                                        <?php
+                                        $barang = getData("SELECT * FROM tbl_barang");
+                                        foreach ($barang as $brg) { ?>
+                                            <option value="<?= $brg['id_barang'] ?>" <?= @$_GET['pilihbrg'] == $brg['id_barang'] ? 'selected' : '' ?>><?= $brg['id_barang'] . " | " . $brg['nama_barang'] ?></option>
+                                        <?php
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -130,7 +133,7 @@ $noBeli = generateNo();
                             <div class="form-group">
                                 <input type="hidden" value="<?= @$_GET['pilihbrg'] ? $selectBrg['id_barang'] : '' ?>" name="kodeBrg">
                                 <label for="namaBrg">Nama Barang</label>
-                                <input type="text" name="namaBrg" class="form-control form-control-sm" id="namaBrg" value="<?= @$_GET['pilihbrg'] ? $selectBrg['nama_barang'] : '' ?>" readonly>
+                                <input type="text" name="namaBrg" class="form-control form-control-sm" id="namaBrg" value="<?= @$_GET['pilihbrg'] && isset($selectBrg['nama_barang']) ? $selectBrg['nama_barang'] : '' ?>" readonly>
                             </div>
                         </div>
                         <div class="col-lg-1">
@@ -142,7 +145,7 @@ $noBeli = generateNo();
                         <div class="col-lg-1">
                             <div class="form-group">
                                 <label for="satuan">Satuan</label>
-                                <input type="text" name="satuan" class="form-control form-control-sm" id="satuan" value="<?= @$_GET['pilihbrg'] ? $selectBrg['satuan'] : '' ?>" readonly>
+                                <input type="text" name="satuan" class="form-control form-control-sm" id="satuan" value="<?= @$_GET['pilihbrg'] && isset($selectBrg['satuan']) ? $selectBrg['satuan'] : '' ?>" readonly>
                             </div>
                         </div>
                         <div class="col-lg-2">
@@ -233,24 +236,23 @@ $noBeli = generateNo();
             </form>
         </div>
     </section>
-
-
-    <script>
-        let pilihbrg = document.getElementById('kodeBrg');
-        pilihbrg.addEventListener('change', function(){
-            document.location.href = this.options[this.selectedIndex].value
-        })
-
-        let qty = document.getElementById('qty');
-        let jmlHarga = document.getElementById('jmlHarga');
-        let harga = document.getElementById('harga');
-        qty.addEventListener('input', function(){
-            jmlHarga.value = qty.value * harga.value;
-        })
-    </script>
-
-
 <?php
-
-    require "../template/footer.php";
+require "../template/footer.php";
 ?>
+<script>
+    let pilihbrg = document.getElementById('kodeBrg');
+    let tgl = document.getElementById('tglNota');
+    pilihbrg.addEventListener('change', function(){
+        let selectedKode = this.options[this.selectedIndex].value;
+        if (selectedKode) {
+            document.location.href = '?pilihbrg=' + selectedKode + '&tgl=' + tgl.value;
+        }
+    });
+
+    let qty = document.getElementById('qty');
+    let jmlHarga = document.getElementById('jmlHarga');
+    let harga = document.getElementById('harga');
+    qty.addEventListener('input', function(){
+        jmlHarga.value = qty.value * harga.value;
+    });
+</script>
