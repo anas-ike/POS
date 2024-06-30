@@ -185,4 +185,14 @@ function in_date($tgl){
     return $tg . "-" . $bln . "-" . $thn;
 }
 
+function omzet(){
+    global $conn;
+
+    $queryOmzet = mysqli_query($conn, "SELECT sum(total) as omzet FROM tbl_jual_head");
+    $data = mysqli_fetch_assoc($queryOmzet);
+    $omzet = number_format($data['omzet'],0,',','.');
+
+    return $omzet;
+}
+
 ?>

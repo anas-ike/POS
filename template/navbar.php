@@ -1,7 +1,15 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <div class="overlay">
+        <i class="fas fa-2x fa-spinner fa-spin"></i>
+      </div>
+    </div>
+
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-light navbar-info">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
