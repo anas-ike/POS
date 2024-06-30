@@ -33,7 +33,7 @@ $pembelian = getData("SELECT * FROM tbl_beli_head");
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?= $main_url ?>dashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Pembelian</li>
+              <li class="breadcrumb-item active">Laporan Pembelian</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -68,7 +68,7 @@ $pembelian = getData("SELECT * FROM tbl_beli_head");
                                     <td><?= $beli['no_beli'] ?></td>
                                     <td><?= in_date( $beli['tgl_beli']) ?></td>
                                     <td><?= $beli['supplier'] ?></td>
-                                    <td class="text-center"><?= number_format($beli['total'],0,",",".") ?></td>
+                                    <td><?= number_format($beli['total'],0,",",".") ?></td>
                                     <td class="text-center"><a href="detail-pembelian.php?id=<?= $beli['no_beli'] ?>&tgl=<?= in_date( $beli['tgl_beli']) ?>" class="btn btn-sm btn-info" title="rincian barang">Detail</a></td>
                                 </tr>
                             <?php
