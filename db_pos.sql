@@ -235,7 +235,7 @@ INSERT INTO `tbl_user` (`userid`, `username`, `fullname`, `password`, `address`,
 (5, 'admin', 'administrator', '$2y$10$GxyJEg/q66IMW0dlDPODZ.qtymZq1Y4BYskZRBU0dgXf6pGW/dU4u', 'asd\r\n', 1, '906-gambar.png'),
 (6, 'supervisor', 'supervisor', '$2y$10$3s.UYN7IP4c3MM1z36Zmt.wXqb23IEh1g3mTcErV5KWPTx9K1l6Ke', 'Jalan Supervisor', 2, '645-gambar.png'),
 (8, 'operator', 'operator', '$2y$10$6T4clEazOpAcFX8tQyBQYOafGnIyya2.wN5tdOiP//P5uToEvEA3u', 'Jalan Operator', 3, '166-gambar.png'),
-(9, 'dosen', 'Dosen', '$2y$10$Ur9BI3BbuAVE3uCzCtFeZemdlOVtd6mzxx/bXi1Zf00Lhtx2qif0e', 'Jalan jalan', 1, 'default-user.png');
+(9, 'dosen', 'Dosen', '$2y$10$6.MXBhYcsTtlJP6DA2JBy.UeDzhuUd9I/H/lKYaOchTuLZewz/pli', 'Jalan jalan', 1, 'default-user.png');
 
 --
 -- Indexes for dumped tables
